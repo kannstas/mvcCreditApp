@@ -60,5 +60,12 @@ namespace MvcCreditApp.Controllers
             db.SaveChanges();
             return "—пасибо, " + newBid.Name + ", за выбор нашего банка.¬аша за€вка будет рассмотрена в течении 10 дней.";
         }
+        public ActionResult BidSearch(string name)
+        {
+            var allBids = db.Bids.Where(a => a.CreditHead.Contains(name)).ToList();
+            if (allBids.Count == 0)
+            {
+                return Content("”казанный кредит" + name + " не найден");
+            } return PartialView(allBids);
     }
 }
